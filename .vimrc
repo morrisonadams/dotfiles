@@ -64,6 +64,11 @@ let &t_SI.="\e[5 q"
 let &t_EI.="\e[1 q"
 let &t_te.="\e[0 q"
 
+if (exists('+colorcolumn'))
+    set colorcolumn=80
+    highlight ColorColumn ctermbg=8
+endif
+
 
 " remappings
 inoremap jk <ESC>
@@ -71,8 +76,52 @@ inoremap jk <ESC>
 nnoremap <F3> :NumbersToggle<CR>
 nnoremap <F4> :NumbersOnOff<CR>
 
-if (exists('+colorcolumn'))
-    set colorcolumn=80
-    highlight ColorColumn ctermbg=8
-endif
+" happy cat message
+echo ">^.^<"
 
+" display
+set relativenumber
+set nowrap
+
+"abbreviations
+iabbrev adn and
+iabbrev waht what
+iabbrev @@ morrison.Adam.S@gmail.com
+
+"leader remap
+let mapleader = " "
+let maplocalleader = "//"
+
+"navigation
+nnoremap H 0
+nnoremap L $
+
+" vimrc editing
+nnoremap <leader>ev :vsplit $MYVIMRC<cr>
+nnoremap <leader>sv :source $MYVIMRC<cr>
+
+"line movement
+nnoremap - ddp
+nnoremap _ dd2kp
+
+"surroundings
+nnoremap <leader>" viw<esc>a"<esc>hbi"<esc>lel
+nnoremap <leader>' viw<esc>a'<esc>hbi'<esc>lel
+nnoremap <leader>( viw<esc>a(<esc>hbi)<esc>lel
+nnoremap <leader>) viw<esc>a(<esc>hbi)<esc>lel
+
+vnoremap <leader>" <esc>`<i"<esc>`>a"<esc>
+
+"replace word in caps
+inoremap <c-u> <esc>viwU
+
+"unmappings
+inoremap <esc> <nop>
+inoremap <up> <nop>
+inoremap <down> <nop>
+inoremap <left> <nop>
+inoremap <right> <nop>
+nnoremap <up> <esc><nop>i
+nnoremap <down> <esc><nop>i
+nnoremap <left> <esc><nop>i
+nnoremap <right> <esc><nop>i
