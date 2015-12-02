@@ -90,7 +90,7 @@ iabbrev @@ morrison.Adam.S@gmail.com
 
 "leader remap
 let mapleader = " "
-let maplocalleader = "//"
+let maplocalleader = "\""
 
 "navigation
 nnoremap H 0
@@ -125,3 +125,23 @@ nnoremap <up> <esc><nop>i
 nnoremap <down> <esc><nop>i
 nnoremap <left> <esc><nop>i
 nnoremap <right> <esc><nop>i
+
+
+" comment autocmds
+autocmd FileType javascript nnoremap <buffer> <localleader>c I//<esc>
+autocmd FileType python nnoremap <buffer> <localleader>c I#<esc>
+autocmd FileType ruby nnoremap <buffer> <localleader>c I#<esc>
+autocmd FileType sql nnoremap <buffer> <localleader>c I--<esc>
+
+" snippets
+autocmd FileType sql :iabbrev <buffer> vc VARCHAR(255)
+autocmd FileType sql :iabbrev <buffer> select SELECT
+autocmd FileType sql :iabbrev <buffer> from FROM
+autocmd FileType sql :iabbrev <buffer> where WHERE
+autocmd FileType sql :iabbrev <buffer> is IS
+autocmd FileType sql :iabbrev <buffer> not NOT
+autocmd FileType sql :iabbrev <buffer> null NULL
+
+"large sql snippets
+
+
