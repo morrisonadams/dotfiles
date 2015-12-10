@@ -98,7 +98,7 @@ nnoremap L $
 
 " SQL DB commands
 nnoremap <leader>dp :DBPromptForBufferParameters<cr>1<cr>
-nnoremap <leader>da Gvgg:DBExecRangeSQL
+nnoremap <leader>da Gvgg:DBExecRangeSQL<cr>
 
 " vimrc editing
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
