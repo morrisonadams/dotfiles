@@ -96,6 +96,10 @@ let maplocalleader = "\""
 nnoremap H 0
 nnoremap L $
 
+" SQL DB commands
+nnoremap <leader>dp :DBPromptForBufferParameters<cr>1<cr>
+nnoremap <leader>da Gvgg:DBExecRangeSQL
+
 " vimrc editing
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
@@ -126,22 +130,33 @@ nnoremap <down> <esc><nop>i
 nnoremap <left> <esc><nop>i
 nnoremap <right> <esc><nop>i
 
-
+" operator mappings
+onoremap in( :<c-u>normal! f(vi(<cr>
+onoremap il( :<c-u>normal! F)vi(<cr>
+onoremap in{ :<c-u>normal! f{vi{<cr>
+onoremap il{ :<c-u>normal! F}vi{<cr>
+onoremap in[ :<c-u>normal! f[vi[<cr>
+onoremap il[ :<c-u>normal! F]vi[<cr>
 " comment autocmds
-autocmd FileType javascript nnoremap <buffer> <localleader>c I//<esc>
-autocmd FileType python nnoremap <buffer> <localleader>c I#<esc>
-autocmd FileType ruby nnoremap <buffer> <localleader>c I#<esc>
-autocmd FileType sql nnoremap <buffer> <localleader>c I--<esc>
+augroup comments
+    autocmd!
+    autocmd FileType javascript nnoremap <buffer> <localleader>c I//<esc>
+    autocmd FileType python nnoremap <buffer> <localleader>c I#<esc>
+    autocmd FileType ruby nnoremap <buffer> <localleader>c I#<esc>
+    autocmd FileType sql nnoremap <buffer> <localleader>c I--<esc>
+augroup END
 
 " snippets
-autocmd FileType sql :iabbrev <buffer> vc VARCHAR(255)
-autocmd FileType sql :iabbrev <buffer> select SELECT
-autocmd FileType sql :iabbrev <buffer> from FROM
-autocmd FileType sql :iabbrev <buffer> where WHERE
-autocmd FileType sql :iabbrev <buffer> is IS
-autocmd FileType sql :iabbrev <buffer> not NOT
-autocmd FileType sql :iabbrev <buffer> null NULL
-
+augroup sql_abbreves
+    autocmd!
+    autocmd FileType sql :iabbrev <buffer> vc VARCHAR(255)
+    autocmd FileType sql :iabbrev <buffer> select SELECT
+    autocmd FileType sql :iabbrev <buffer> from FROM
+    autocmd FileType sql :iabbrev <buffer> where WHERE
+    autocmd FileType sql :iabbrev <buffer> is IS
+    autocmd FileType sql :iabbrev <buffer> not NOT
+    autocmd FileType sql :iabbrev <buffer> null NULL
+augroup END
 "large sql snippets
 
 
