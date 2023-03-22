@@ -1,143 +1,140 @@
+" General settings
 syntax on
 set t_Co=256
-
-colorscheme mustang
-set ts=4 sw=4 et
-let g:indent_guides_start_level = 2
-let g:indent_guides_guide_size = 1
-
-
-set nocompatible              " be iMproved, required
-filetype off                  " required
-
-
-
-
-let g:dbext_default_profile_mysql_local = 'type=MYSQL:user=root:passwd=Kgpawh91:dbname=decmembershiplist:host=127.0.0.1:port=3306'
-
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
-
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
-
-" The following are examples of different formats supported.
-" Keep Plugin commands between vundle#begin/end.
-
-Plugin 'scrooloose/syntastic'
-
-Plugin 'SQLComplete.vim'
-
-Plugin 'myusuf3/numbers.vim'
-
-Plugin 'scrooloose/nerdtree'
-
-Plugin 'bling/vim-airline'
-
-Plugin 'nathanaelkane/vim-indent-guides'
-
-Plugin 'dbext.vim'
-
-Plugin 'bronson/vim-trailing-whitespace'
-
-Plugin 'kien/rainbow_parentheses.vim'
-
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-"
-set number
+set relativenumber
+set nowrap
+set nocompatible
+set backspace=2
+set backup
 set hidden
-set ruler
-set cursorline
 set title
 set smartcase
 set laststatus=2
+set ts=4 sw=4 et
+set noswapfile
 
+" Performance optimizations
+set re=1
+set lazyredraw
+
+" Vundle configuration
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" Plugins
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'scrooloose/syntastic'
+Plugin 'myusuf3/numbers.vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'tpope/vim-fugitive'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
+Plugin 'vimwiki/vimwiki'
+Plugin 'easymotion/vim-easymotion'
+Plugin 'itchyny/lightline.vim'
+Plugin 'junegunn/vim-easy-align'
+Plugin 'nathanaelkane/vim-indent-guides'
+Plugin 'morhetz/gruvbox'
+Plugin 'shinchu/lightline-gruvbox.vim'
+Plugin 'mhinz/vim-startify'
+Plugin 'terryma/vim-expand-region'
+
+call vundle#end()
+filetype plugin indent on
+
+" Color scheme
+autocmd vimenter * ++nested colorscheme gruvbox
+set background=dark   " Setting light mode
+let g:lightline = {}
+let g:lightline.colorscheme = 'gruvbox'
+
+" Mappings
+" General
+map <C-J> 5jz.
+map <C-K> 5kz.
+map <C-n> :NERDTreeToggle<CR>
+let mapleader = " "
+let maplocalleader = "\""
+
+" EasyMotion
+map  / <Plug>(easymotion-sn)
+omap / <Plug>(easymotion-tn)
+
+" Cursor shape in different modes
 let &t_ti.="\e[1 q"
 let &t_SI.="\e[5 q"
 let &t_EI.="\e[1 q"
 let &t_te.="\e[0 q"
 
-if (exists('+colorcolumn'))
-    set colorcolumn=80
-    highlight ColorColumn ctermbg=8
-endif
+" Expand/shrink region
+map K <Plug>(expand_region_expand)
+map J <Plug>(expand_region_shrink)
 
-
-" remappings
+" Remappings
 inoremap jk <ESC>
-
 nnoremap <F3> :NumbersToggle<CR>
 nnoremap <F4> :NumbersOnOff<CR>
+xmap ga <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
 
-" happy cat message
+" Happy cat message
 echo ">^.^<"
 
-" display
-set relativenumber
-set nowrap
-
-"abbreviations
+" Abbreviations
 iabbrev adn and
 iabbrev waht what
 iabbrev @@ morrison.Adam.S@gmail.com
 
-"leader remap
-let mapleader = " "
-let maplocalleader = "\""
-
-"navigation
+" Navigation
 nnoremap H 0
 nnoremap L $
 
-" SQL DB commands
-nnoremap <leader>dp :DBPromptForBufferParameters<cr>1<cr>
-nnoremap <leader>da Gvgg:DBExecRangeSQL<cr>
+" Indent guides
+let g:indent_guides_enable_on_vim_startup = 1
 
-" vimrc editing
+" Vimrc editing
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
+nnoremap <leader>es :vnew<cr>
 
-"line movement
+" Quality of life improvements
+nnoremap <leader>wf :%y+ <cr>
+nnoremap <leader>cl 0v$y
+
+" Save and quit
+nnoremap <leader>qq :wq <cr>
+
+" Git commands
+nnoremap <leader>gs :Gstatus <cr>
+nnoremap <leader>go :Gcommit <cr>
+nnoremap <leader>gf jjjwwwwv$hy<esc>ggpA:
+
+" Document controls
+nnoremap <leader>wqq :wq <cr>
+nnoremap <leader>qq :q <cr> 
+
+" Line movement
 nnoremap - ddp
 nnoremap _ dd2kp
 
-"surroundings
+" Surroundings
 nnoremap <leader>" viw<esc>a"<esc>hbi"<esc>lel
 nnoremap <leader>' viw<esc>a'<esc>hbi'<esc>lel
 nnoremap <leader>( viw<esc>a(<esc>hbi)<esc>lel
 nnoremap <leader>) viw<esc>a(<esc>hbi)<esc>lel
-
 vnoremap <leader>" <esc>`<i"<esc>`>a"<esc>
 
-"replace word in caps
-inoremap <c-u> <esc>viwU
+" Replace word in caps
+nnoremap <c-b> <esc>viwU
 
-"unmappings
-inoremap <esc> <nop>
-inoremap <up> <nop>
-inoremap <down> <nop>
-inoremap <left> <nop>
-inoremap <right> <nop>
-nnoremap <up> <esc><nop>i
-nnoremap <down> <esc><nop>i
-nnoremap <left> <esc><nop>i
-nnoremap <right> <esc><nop>i
-
-" operator mappings
+" Operator mappings
 onoremap in( :<c-u>normal! f(vi(<cr>
 onoremap il( :<c-u>normal! F)vi(<cr>
 onoremap in{ :<c-u>normal! f{vi{<cr>
 onoremap il{ :<c-u>normal! F}vi{<cr>
 onoremap in[ :<c-u>normal! f[vi[<cr>
 onoremap il[ :<c-u>normal! F]vi[<cr>
-" comment autocmds
+
+" Comment autocmds
 augroup comments
     autocmd!
     autocmd FileType javascript nnoremap <buffer> <localleader>c I//<esc>
@@ -146,17 +143,14 @@ augroup comments
     autocmd FileType sql nnoremap <buffer> <localleader>c I--<esc>
 augroup END
 
-" snippets
-augroup sql_abbreves
-    autocmd!
-    autocmd FileType sql :iabbrev <buffer> vc VARCHAR(255)
-    autocmd FileType sql :iabbrev <buffer> select SELECT
-    autocmd FileType sql :iabbrev <buffer> from FROM
-    autocmd FileType sql :iabbrev <buffer> where WHERE
-    autocmd FileType sql :iabbrev <buffer> is IS
-    autocmd FileType sql :iabbrev <buffer> not NOT
-    autocmd FileType sql :iabbrev <buffer> null NULL
-augroup END
-"large sql snippets
+" Snippets
 
+" Autocomplete
+autocmd Filetype sql :nmap <leader>m yiwA AS <esc>pa,<esc>o
+autocmd Filetype sql :nmap <leader>aa gaip*<c-x> AS<cr>  
+autocmd Filetype sql :nmap <leader>== gaip=<cr>  
+autocmd Filetype sql :nmap <leader>tt gaip*<c-x>\s[a-z_]*\.[a-z_]* <cr>gaip=<cr>
 
+" Field selection
+:imap ;; <C-O>/%%%<CR><C-O>c3l
+:nmap ;; /%%%<CR>c3l
